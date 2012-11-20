@@ -107,13 +107,13 @@ public class SakaiValueSource implements ValueSource, Observer {
 			ContentResource resource = chs.getResource(filePath);
 			return resource.streamContent();
 		} catch (PermissionException pe) {
-			LOG.error("This shouldn't happen as we have ability to ready any file.");
+			LOG.error("This shouldn't happen as we have ability to ready any file.", pe);
 		} catch (ServerOverloadException e) {
-			LOG.error("Server is dying, we need help.");
+			LOG.error("Server is dying, we need help.", e);
 		} catch (IdUnusedException e) {
-			LOG.error("Couldn't find file: "+ filePath);
+			LOG.error("Couldn't find file: "+ filePath, e);
 		} catch (TypeException e) {
-			LOG.error("Resource isn't a file: "+ filePath);
+			LOG.error("Resource isn't a file: "+ filePath, e);
 		} finally {
 			// Allow it to work in Sakai 2.6, this should change 
 			// when we have moved toe 2.8
